@@ -58,7 +58,10 @@ const Details = () => {
             <h3 className="text-xl font-medium mb-6">Ingredients</h3>
             {ingredients.map((item, index) => (
               <>
-                <p key={index} className="flex items-center gap-2 mb-2 capitalize">
+                <p
+                  key={index}
+                  className="flex items-center gap-2 mb-2 capitalize"
+                >
                   <span className="p-1 bg-[#F89A20] rounded-full text-white">
                     <FaCheck />
                   </span>
@@ -73,9 +76,11 @@ const Details = () => {
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
               Category: {category}
             </p>
-            <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">Distributor: {distributor_name} </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
-              Post: {post_time}
+              Distributor: {distributor_name}{" "}
+            </p>
+            <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
+              Posted: {post_time}
             </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
               Rating: {rating}
@@ -84,6 +89,11 @@ const Details = () => {
               Reviews: {reviews}
             </p>
           </div>
+        </div>
+        <div className="w-fit mx-auto mt-10 pb-20">
+          <button className="py-3 px-5 bg-[#F89A20] border border-[#F89A20] hover:bg-transparent hover:text-zinc-700 text-lg duration-300 rounded-md text-white font-medium ">
+            Meal Request
+          </button>
         </div>
       </div>
     </div>

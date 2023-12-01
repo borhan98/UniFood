@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Category from "./Category";
 import "./Category.css";
+import SectionTitle from "../../Components/SectionTitle";
 
 const CategoryMeals = () => {
   const [meals] = useMeals();
@@ -12,7 +13,8 @@ const CategoryMeals = () => {
   const dinner = meals.filter((meal) => meal.category === "dinner");
 
   return (
-    <div className="container mx-auto px-2 lg:px-0 mt-20">
+    <div className="container mx-auto px-2 lg:px-0">
+        <SectionTitle secTitle="Meals By Category" secDescrip="Explore culinary diversity with our 'Meal by Category' section, offering a curated selection of delicious dishes to suit every taste bud at your university hostel" />
       <Tabs defaultIndex={0} onSelect={(index) => console.log(index)}>
         <div className="w-fit mx-auto mb-10">
           <TabList className={"flex"}>
