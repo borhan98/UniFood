@@ -2,7 +2,6 @@ import { FaSearch } from "react-icons/fa";
 import banner1 from "../../assets/Banner/banner1.png";
 import banner2 from "../../assets/Banner/banner2.png";
 import banner3 from "../../assets/Banner/banner3.png";
-// import banner4 from "../../assets/Banner/banner4.png";
 import banner5 from "../../assets/Banner/banner5.png";
 import banner6 from "../../assets/Banner/banner6.png";
 import { Carousel } from "react-responsive-carousel";
@@ -46,9 +45,6 @@ const Banner = () => {
             <div className="flex items-center h-full">
               <img src={banner3} />
             </div>
-            {/* <div className="flex items-center h-full">
-              <img src={banner4} />
-            </div> */}
             <div className="flex items-center h-full">
               <img src={banner5} />
             </div>

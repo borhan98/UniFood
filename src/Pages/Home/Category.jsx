@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 import "./Category.css";
+import { Link } from "react-router-dom";
 
 const Category = ({ meal }) => {
-  const { meal_title, image, price, rating, category } = meal;
+  const { _id, meal_title, image, price, rating, category } = meal;
   const oldRate = ((price * 10) / 100 + price).toFixed(2);
 
   return (
@@ -18,13 +19,19 @@ const Category = ({ meal }) => {
           <span className="line-through">${oldRate}</span>
         </p>
         <p className="flex justify-around items-center gap-6 text-lg font-medium text-zinc-600 my-4 capitalize">
-          <span className="py-2 px-4 border rounded-md bg-white">{category} Item</span>
+          <span className="py-2 px-4 border rounded-md bg-white">
+            {category} Item
+          </span>
           <span className="text_clr text-[#F89A20] flex items-center gap-1">
             <FaStar />
             {rating}
           </span>
         </p>
-        <button className="py-2 bg-[#F89A20] w-full rounded-md text-white font-medium ">Details</button>
+        <Link to={`/details/${_id}`}>
+          <button className="py-2 bg-[#F89A20] w-full rounded-md text-white font-medium ">
+            Details
+          </button>
+        </Link>
       </div>
     </div>
   );

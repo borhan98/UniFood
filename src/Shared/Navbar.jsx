@@ -30,7 +30,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-[#00000084] fixed z-50 w-full">
+    // <div className="bg-[#00000084]">
+    <div className="bg-[#f89a2095] shadow-md">
       <div className="container mx-auto px-2 lg:px-0 navbar">
         <div className="navbar-start">
           <div className="dropdown">
@@ -50,7 +51,7 @@ const Navbar = () => {
                 />
               </svg>
             </div>
-            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-white">
+            <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               {menuLinks}
             </ul>
           </div>
@@ -59,7 +60,7 @@ const Navbar = () => {
             <Link>
               <div className="flex items-center">
                 <img className="w-12" src={UniFoodLogo} alt="Logo" />
-                <h3 className="text-3xl font-bold text-white">
+                <h3 className="text-3xl font-bold">
                   Uni<span className="text-[#F89A20]">Food</span>{" "}
                 </h3>
               </div>
@@ -67,7 +68,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-white">{menuLinks}</ul>
+          <ul className="menu menu-horizontal px-1">{menuLinks}</ul>
         </div>
         <div className="navbar-end space-x-2">
           {/* Dropdow Notification */}

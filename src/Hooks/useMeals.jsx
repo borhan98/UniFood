@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
-
+import useAxiosPublic from "./useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const useMeals = () => {
-    const [meals, setMeals] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
-    useEffect(() => {
-        fetch("./meals.json")
-        .then(res => res.json())
-        .then(data => setMeals(data));
-    }, [])
+  const { data: meals = [] } = useQuery({
+    queryKey: ["meals"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/meals");
+      return res.data;
+    },
+  });
 
-    return [meals]
+  return [meals];
 };
 
 export default useMeals;
