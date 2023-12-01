@@ -1,0 +1,23 @@
+.card_style {
+    transition: all 0.3s ease;
+}
+.card_style:hover {
+    background: #F89A20;
+    box-shadow: 2px 2px 2px #F89A20;
+    transform: scale(1.01);
+}
+.card_style:hover button {
+    background: #FFF;
+    color: #786f6f;
+}
+.card_style:hover .text_clr {
+    color: #FFF;
+}
+
+.react-tabs__tab--selected {
+    color: #F89A20;
+    border-bottom: 3px solid #F89A20;
+}
+.react-tabs__tab--selected:focus {
+    outline: none;
+}

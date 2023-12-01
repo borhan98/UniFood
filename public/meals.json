@@ -1,0 +1,195 @@
+[
+  {
+    "_id": "1",
+    "meal_title": "Classic Pancakes",
+    "category": "breakfast",
+    "image": "https://i.ibb.co/0qsrJkZ/Classic-Pancakes.jpg",
+    "ingredients": [
+      "flour",
+      "eggs",
+      "milk",
+      "baking powder",
+      "butter",
+      "maple syrup"
+    ],
+    "description": "Delicious fluffy pancakes served with rich maple syrup.",
+    "price": 8.99,
+    "rating": 0,
+    "post_time": "11/14/2023 08:00 AM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Sunrise Eats",
+    "distributor_email": "info@sunriseeats.com"
+  },
+  {
+    "_id": "2",
+    "meal_title": "Chicken Caesar Salad",
+    "category": "lunch",
+    "image": "https://i.ibb.co/zsVJBhq/Chicken-Caesar-Salad.jpg",
+    "ingredients": [
+      "grilled chicken",
+      "romaine lettuce",
+      "croutons",
+      "parmesan cheese",
+      "Caesar dressing"
+    ],
+    "description": "A classic Caesar salad with grilled chicken, crisp lettuce, and savory dressing.",
+    "price": 12.99,
+    "rating": 0,
+    "post_time": "11/14/2023 12:30 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Green Bites",
+    "distributor_email": "info@greenbites.com"
+  },
+  {
+    "_id": "3",
+    "meal_title": "Spaghetti Bolognese",
+    "category": "dinner",
+    "image": "https://i.ibb.co/hm412fY/Spaghetti-Bolognese.jpg",
+    "ingredients": [
+      "ground beef",
+      "tomato sauce",
+      "onions",
+      "garlic",
+      "spaghetti",
+      "Parmesan cheese"
+    ],
+    "description": "Hearty spaghetti with a rich Bolognese sauce and grated Parmesan.",
+    "price": 14.99,
+    "rating": 0,
+    "post_time": "11/14/2023 06:00 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Twilight Tastes",
+    "distributor_email": "info@twilighttastes.com"
+  },
+  {
+    "_id": "4",
+    "meal_title": "Avocado Toast",
+    "category": "breakfast",
+    "image": "https://i.ibb.co/4VJ9kgV/Avocado-Toast.jpg",
+    "ingredients": [
+      "whole-grain bread",
+      "avocado",
+      "poached egg",
+      "cherry tomatoes",
+      "olive oil"
+    ],
+    "description": "Healthy and delicious avocado toast topped with a perfectly poached egg.",
+    "price": 9.99,
+    "rating": 0,
+    "post_time": "11/15/2023 09:30 AM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Fresh Mornings",
+    "distributor_email": "info@freshmornings.com"
+  },
+  {
+    "_id": "5",
+    "meal_title": "Grilled Chicken Wrap",
+    "category": "lunch",
+    "image": "https://i.ibb.co/WkG4NhN/Grilled-Chicken-Wrap.jpg",
+    "ingredients": [
+      "grilled chicken",
+      "whole wheat wrap",
+      "lettuce",
+      "tomato",
+      "hummus"
+    ],
+    "description": "A flavorful grilled chicken wrap with fresh veggies and hummus.",
+    "price": 11.49,
+    "rating": 0,
+    "post_time": "11/15/2023 01:00 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "WrapMaster",
+    "distributor_email": "info@wrapmaster.com"
+  },
+  {
+    "_id": "6",
+    "meal_title": "Salmon Risotto",
+    "category": "dinner",
+    "image": "https://i.ibb.co/mt6HJRn/Salmon-Risotto.jpg",
+    "ingredients": [
+      "salmon fillet",
+      "arborio rice",
+      "white wine",
+      "asparagus",
+      "parmesan cheese"
+    ],
+    "description": "Creamy salmon risotto with tender asparagus and a hint of white wine.",
+    "price": 16.99,
+    "rating": 0,
+    "post_time": "11/15/2023 07:30 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Elegant Eats",
+    "distributor_email": "info@eleganteats.com"
+  },
+  {
+    "_id": "7",
+    "meal_title": "Fruit Parfait",
+    "category": "breakfast",
+    "image": "https://i.ibb.co/4Mtt5Dz/Fruit-Parfait.jpg",
+    "ingredients": [
+      "Greek yogurt",
+      "granola",
+      "strawberries",
+      "blueberries",
+      "honey"
+    ],
+    "description": "A refreshing fruit parfait with layers of yogurt, granola, and fresh berries.",
+    "price": 7.49,
+    "rating": 0,
+    "post_time": "11/16/2023 08:30 AM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Healthy Bites",
+    "distributor_email": "info@healthybites.com"
+  },
+  {
+    "_id": "8",
+    "meal_title": "Mediterranean Salad",
+    "category": "lunch",
+    "image": "https://i.ibb.co/GPPt47S/Mediterranean-Salad.jpg",
+    "ingredients": [
+      "mixed greens",
+      "kalamata olives",
+      "feta cheese",
+      "cucumber",
+      "red onion",
+      "balsamic vinaigrette"
+    ],
+    "description": "A light and flavorful Mediterranean salad with fresh ingredients and tangy vinaigrette.",
+    "price": 10.99,
+    "rating": 0,
+    "post_time": "11/16/2023 01:15 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Fresh Greens",
+    "distributor_email": "info@freshgreens.com"
+  },
+  {
+    "_id": "9",
+    "meal_title": "Beef Stir-Fry",
+    "category": "dinner",
+    "image": "https://i.ibb.co/ggtzPTw/Beef-Stir-Fry.jpg",
+    "ingredients": [
+      "beef strips",
+      "broccoli",
+      "bell peppers",
+      "soy sauce",
+      "ginger",
+      "garlic"
+    ],
+    "description": "Savory beef stir-fry with a mix of colorful vegetables and flavorful soy-ginger sauce.",
+    "price": 15.49,
+    "rating": 0,
+    "post_time": "11/16/2023 07:00 PM",
+    "likes": 0,
+    "reviews": 0,
+    "distributor_name": "Wok Delight",
+    "distributor_email": "info@wokdelight.com"
+  }
+]
