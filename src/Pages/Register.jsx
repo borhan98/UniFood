@@ -5,6 +5,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
@@ -12,28 +13,53 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
   // handle form
   const onSubmit = (data) => {
-    // console.log(data);
-
     // create new user
     createUser(data.email, data.password)
-      .then((result) => {
-        if (result.user) {
-          toast.success("Registration successful.", {
+      .then(() => {
+        //update profile
+        updateUserProfile(data.name, data.photo)
+          .then(() => {
+            // POST API to store newUser
+            const newUser = {
+              name: data.name,
+              email: data.email,
+              image: data.photo,
+              badge: "bronze",
+            };
+            axiosPublic.post("/users", newUser).then(() => {});
+
+            // Show success alert
+            reset();
+            toast.success("Registration successful.", {
+              style: {
+                background: "#000000",
+                padding: "12px",
+                color: "#FFFAEE",
+              },
+            });
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      })
+      .catch((err) => {
+        if (err.message.includes("email-already-in-use")) {
+          toast("Already has an account for the email, please login", {
+            icon: "⚠",
             style: {
               background: "#000000",
-              padding: "12px",
+              padding: "16px",
               color: "#FFFAEE",
             },
           });
         }
-      })
-      .catch((err) => {
-        console.log(err.message);
       });
   };
   return (

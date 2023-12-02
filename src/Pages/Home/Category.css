@@ -6,9 +6,17 @@
     box-shadow: 2px 2px 2px #F89A20;
     transform: scale(1.01);
 }
+.card_style button {
+    transition: all 0.3s ease;
+}
 .card_style:hover button {
     background: #FFF;
-    color: #786f6f;
+    color: #F89A20;
+    letter-spacing: 2px;
+}
+.card_style:hover .category_style {
+    background: #FBC47C;
+    border: none
 }
 .card_style:hover .text_clr {
     color: #FFF;

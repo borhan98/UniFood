@@ -1,22 +1,11 @@
 import PropTypes from "prop-types";
 import SectionTitle from "../../Components/SectionTitle";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FaQuoteLeft, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa6";
 
-const Reviews = ({ _id, meal_title }) => {
-  const axiosPublic = useAxiosPublic();
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["reviews"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/reviews/${_id}`);
-      return res.data;
-    },
-  });
-  // const { meal_title, opinion, user_name, user_image, rating } = reviews;
+const Reviews = ({ mealReviews, meal_title }) => {
 
   return (
     <div className="bg-white shadow-md py-10 mt-24">
@@ -27,17 +16,17 @@ const Reviews = ({ _id, meal_title }) => {
       <div>
         <Carousel className="mt-20"
           autoPlay={true}
-          showArrows={false}
+          showArrows={true}
           showStatus={false}
           showThumbs={false}
           infiniteLoop={true}
         >
-          {reviews.map((review, index) => (
+          {mealReviews.map((review, index) => (
             <div
               key={index}
-              className="flex gap-10 items-center justify-center"
+              className="grid md:grid-cols-2 gap-10 items-center justify-center"
             >
-              <div className="text-right">
+              <div className="text-right pl-24">
                 <h3 className="text-3xl font-medium text-zinc-700">
                   {review?.meal_title}
                 </h3>
@@ -70,6 +59,6 @@ const Reviews = ({ _id, meal_title }) => {
 
 export default Reviews;
 Reviews.propTypes = {
-  _id: PropTypes.string.isRequired,
   meal_title: PropTypes.string.isRequired,
+  mealReviews: PropTypes.array.isRequired,
 };

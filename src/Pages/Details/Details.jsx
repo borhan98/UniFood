@@ -4,8 +4,12 @@ import { FaCheck } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
 import TakeReview from "./TakeReview";
 import Reviews from "./Reviews";
+import { useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Details = () => {
+  const axiosPublic = useAxiosPublic();
   const meal = useLoaderData();
   const {
     _id,
@@ -21,6 +25,15 @@ const Details = () => {
     category,
     price,
   } = meal;
+  // load reviews based on the meal
+  const { data: mealReviews = [], refetch } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/reviews/${_id}`);
+      return res.data;
+    },
+  });
+  const [totalReviews, setTotalReviews] = useState(reviews)
   // const dateTime = new Date().toLocaleString()
 
   return (
@@ -87,7 +100,7 @@ const Details = () => {
               Rating: ({rating})
             </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
-              Reviews: ({reviews})
+              Reviews: ({totalReviews})
             </p>
           </div>
         </div>
@@ -98,11 +111,10 @@ const Details = () => {
         </div>
         {/* All reviews for the meal */}
         {
-          // TODO: correction the condition 
-          reviews ? <Reviews _id={_id} meal_title={meal_title} /> : ""
+          reviews ? <Reviews mealReviews={mealReviews} meal_title={meal_title} /> : ""
         }
         {/* Take review from user */}
-        <TakeReview meal={meal} />
+        <TakeReview refetch={refetch} meal={meal} totalReviews={totalReviews} setTotalReviews={setTotalReviews} />
       </div>
     </div>
   );

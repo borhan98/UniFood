@@ -19,8 +19,8 @@ const Category = ({ meal }) => {
           <span className="line-through">${oldRate}</span>
         </p>
         <p className="flex justify-around items-center gap-6 text-lg font-medium text-zinc-600 my-4 capitalize">
-          <span className="py-2 px-4 border rounded-md bg-white">
-            {category} Item
+          <span className="category_style py-2 px-4 border rounded-md bg-white">
+            {category}
           </span>
           <span className="text_clr text-[#F89A20] flex items-center gap-1">
             <FaStar />

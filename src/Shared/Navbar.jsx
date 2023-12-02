@@ -124,7 +124,7 @@ const Navbar = () => {
               </div>
               <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-60">
                 <p className="text-center font-medium my-2">
-                  Username
+                  {user?.displayName}
                 </p>
                 <li>
                   <Link>Dashboard</Link>
@@ -136,7 +136,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to={"/login"}>
-              <button className="py-2 px-4 rounded-md bg-[#F89A20] text-white text-lg capitalize">
+              <button className="py-2 px-4 font-medium rounded-md bg-[#F89A20] text-white text-lg capitalize">
                 Join Us
               </button>
             </Link>
