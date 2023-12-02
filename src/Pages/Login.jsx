@@ -6,15 +6,21 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  // handle form 
-  const onSubmit = (data) => console.log(data)
+  // handle form
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="relative flex justify-center bg-login-bg bg-center bg-cover min-h-[90vh] w-full ">
       <div className="absolute w-full h-full top-0 left-0 bg-black opacity-50"></div>
-      <div className="relative text-white p-10 my-10 bg-[#f89a206c] shadow-md h-fit">
+      <div className="relative text-white p-10 my-10 bg-[#0000008e] shadow-md h-fit">
         <h3 className="text-2xl mb-10 font-semibold text-white text-center">
           Sign In to your account
         </h3>
@@ -22,20 +28,32 @@ const Login = () => {
           {/* Email Field */}
           <div className="flex flex-col space-y-2 mb-4">
             <label htmlFor="email">Your email</label>
-            <input {...register("email")}
+            <input
+              {...register("email", { required: true })}
               type="email"
+              placeholder="Enter your email"
               className="py-3 px-4 w-96 text-black bg-white rounded-md shadow focus:shadow-xl focus:outline-none "
               id="email"
             />
+            {errors.email && (
+              <span className="text-red-500">Your email is required*</span>
+            )}
           </div>
           {/* Password Field */}
           <div className="relative flex flex-col space-y-2">
             <label htmlFor="password">Your password</label>
-            <input {...register("password")}
+            <input
+              {...register("password", { required: true, minLength: 6 })}
               type={showPass ? "password" : "text"}
+              placeholder="Enter your password"
               className="py-3 px-4 w-96 text-black bg-white rounded-md shadow focus:shadow-xl focus:outline-none "
               id="password"
             />
+            {errors.password && (
+              <span className="text-red-500">
+                Password must have at least 6 character*
+              </span>
+            )}
             {/* Show Password */}
             <span
               onClick={() => setShowPass(!showPass)}
@@ -48,7 +66,10 @@ const Login = () => {
             </a>
           </div>
           {/* Sign In button */}
-          <button type="submit" className="py-3 mt-4 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest ">
+          <button
+            type="submit"
+            className="py-3 mt-4 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest "
+          >
             Sign In
           </button>
         </form>
