@@ -3,6 +3,8 @@ import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
@@ -11,10 +13,28 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { createUser } = useAuth();
 
   // handle form
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+
+    // create new user
+    createUser(data.email, data.password)
+      .then((result) => {
+        if (result.user) {
+          toast.success("Registration successful.", {
+            style: {
+              background: "#000000",
+              padding: "12px",
+              color: "#FFFAEE",
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <div className="relative flex justify-center bg-login-bg bg-center bg-cover min-h-[90vh] w-full ">

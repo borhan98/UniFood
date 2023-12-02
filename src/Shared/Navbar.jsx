@@ -1,10 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import UniFoodLogo from "../assets/UniLogo.png";
-import ProfileImg from "../assets/profile_pic.jpg";
 import { FaBell } from "react-icons/fa";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const user = null;
+  const { user, logoutUser } = useAuth();
   const activeRoute = ({ isActive }) =>
     isActive
       ? "bg-[#F89A20] py-2 px-3 rounded-md text-white"
@@ -29,6 +30,23 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  // Handle logout user
+  const handleLogout = () => {
+    logoutUser()
+    .then(() => {
+      toast.success("Logged Out.", {
+        style: {
+          background: "#000000",
+          padding: "12px",
+          color: "#FFFAEE",
+        },
+      });
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+  }
 
   return (
     // <div className="bg-[#00000084]">
@@ -90,6 +108,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          {/* User profile and Join us button */}
           {user ? (
             <div className="dropdown dropdown-end">
               <div
@@ -99,19 +118,19 @@ const Navbar = () => {
               >
                 <img
                   className="w-12 h-12 rounded-full"
-                  src={ProfileImg}
+                  src={user?.photoURL}
                   alt="Profile Image"
                 />
               </div>
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-fit">
-                <p className="text-center">
-                  <Link>Username</Link>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-60">
+                <p className="text-center font-medium my-2">
+                  Username
                 </p>
                 <li>
                   <Link>Dashboard</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button onClick={handleLogout}>Logout</button>
                 </li>
               </ul>
             </div>

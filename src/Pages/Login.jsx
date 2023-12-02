@@ -3,6 +3,8 @@ import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
@@ -11,10 +13,32 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { loginUser } = useAuth();
 
   // handle form
   const onSubmit = (data) => {
-    console.log(data);
+    // login user
+    loginUser(data.email, data.password)
+      .then((result) => {
+        if (result.user) {
+          toast.success("Logged in successfully.", {
+            style: {
+              background: "#000000",
+              padding: "12px",
+              color: "#FFFAEE",
+            },
+          });
+        }
+      })
+      .catch(() => {
+        toast.error("Invalid email or wrong password", {
+          style: {
+            background: "#000000",
+            padding: "12px",
+            color: "#FFFAEE",
+          },
+        });
+      });
   };
 
   return (
