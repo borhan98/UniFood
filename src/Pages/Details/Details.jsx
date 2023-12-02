@@ -2,10 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
+import TakeReview from "./TakeReview";
+import Reviews from "./Reviews";
 
 const Details = () => {
   const meal = useLoaderData();
   const {
+    _id,
     meal_title,
     image,
     distributor_name,
@@ -21,7 +24,7 @@ const Details = () => {
   // const dateTime = new Date().toLocaleString()
 
   return (
-    <div className="bg-base-200">
+    <div className="bg-base-200 pb-20">
       <div className="container mx-auto px-2 lg:px-0">
         <Helmet>
           <title>UniFood | Meal Details</title>
@@ -57,17 +60,15 @@ const Details = () => {
           <div className="bg-white p-6 rounded-md">
             <h3 className="text-xl font-medium mb-6">Ingredients</h3>
             {ingredients.map((item, index) => (
-              <>
-                <p
-                  key={index}
-                  className="flex items-center gap-2 mb-2 capitalize"
-                >
-                  <span className="p-1 bg-[#F89A20] rounded-full text-white">
-                    <FaCheck />
-                  </span>
-                  {item}
-                </p>
-              </>
+              <p
+                key={index}
+                className="flex items-center gap-2 mb-2 capitalize"
+              >
+                <span className="p-1 bg-[#F89A20] rounded-full text-white">
+                  <FaCheck />
+                </span>
+                {item}
+              </p>
             ))}
           </div>
           {/* Others details */}
@@ -83,18 +84,25 @@ const Details = () => {
               Posted: {post_time}
             </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
-              Rating: {rating}
+              Rating: ({rating})
             </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
-              Reviews: {reviews}
+              Reviews: ({reviews})
             </p>
           </div>
         </div>
-        <div className="w-fit mx-auto mt-10 pb-20">
+        <div className="w-fit mx-auto mt-10">
           <button className="py-3 px-5 bg-[#F89A20] border border-[#F89A20] hover:bg-transparent hover:text-zinc-700 text-lg duration-300 rounded-md text-white font-medium ">
             Meal Request
           </button>
         </div>
+        {/* All reviews for the meal */}
+        {
+          // TODO: correction the condition 
+          reviews ? <Reviews _id={_id} meal_title={meal_title} /> : ""
+        }
+        {/* Take review from user */}
+        <TakeReview meal={meal} />
       </div>
     </div>
   );

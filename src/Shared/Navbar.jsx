@@ -4,6 +4,7 @@ import ProfileImg from "../assets/profile_pic.jpg";
 import { FaBell } from "react-icons/fa";
 
 const Navbar = () => {
+  const user = null;
   const activeRoute = ({ isActive }) =>
     isActive
       ? "bg-[#F89A20] py-2 px-3 rounded-md text-white"
@@ -89,35 +90,38 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          {/* TODO: conditional join us button */}
-          <button className="py-2 px-4 rounded-md bg-[#F89A20] text-white text-lg capitalize">
-            Join Us
-          </button>
-          {/* Dropdow profile */}
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="border-4 border-[#F89A20] rounded-full"
-            >
-              <img
-                className="w-12 h-12 rounded-full"
-                src={ProfileImg}
-                alt="Profile Image"
-              />
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="border-4 border-[#F89A20] rounded-full"
+              >
+                <img
+                  className="w-12 h-12 rounded-full"
+                  src={ProfileImg}
+                  alt="Profile Image"
+                />
+              </div>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-fit">
+                <p className="text-center">
+                  <Link>Username</Link>
+                </p>
+                <li>
+                  <Link>Dashboard</Link>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
+              </ul>
             </div>
-            <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-fit">
-              <p className="text-center">
-                <Link>Username</Link>
-              </p>
-              <li>
-                <Link>Dashboard</Link>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+          ) : (
+            <Link to={"/login"}>
+              <button className="py-2 px-4 rounded-md bg-[#F89A20] text-white text-lg capitalize">
+                Join Us
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
