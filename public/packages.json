@@ -1,0 +1,33 @@
+[
+  {
+    "package": "silver",
+    "price": 99.9,
+    "facilities": [
+      "Basic meal plan with access to standard cafeteria options.",
+      "Limited number of meals per week",
+      "Standard dining hours.",
+      "Access to common dining areas."
+    ]
+  },
+  {
+    "package": "gold",
+    "price": 199.9,
+    "facilities": [
+      "Expanded meal options, including some premium choices.",
+      "Increased number of meals per week.",
+      "Flexible dining hours to accommodate different schedules.",
+      "Priority seating or reservation options."
+    ]
+  },
+  {
+    "package": "platinum",
+    "price": 259.5,
+    "facilities": [
+      "Premium meal choices with a variety of cuisines.",
+      "Unlimited or a significantly higher number of meals per week.",
+      "Exclusive dining areas or VIP sections.",
+      "Personalized dietary planning with nutritionist consultations.",
+      "24/7 access to some food options or late-night dining services."
+    ]
+  }
+]
