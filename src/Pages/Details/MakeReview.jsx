@@ -4,12 +4,15 @@ import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const TakeReview = ({ meal, refetch }) => {
+const MakeReview = ({ meal }) => {
   const { _id, meal_title } = meal;
   const { user } = useAuth();
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     const newReview = {
@@ -19,30 +22,45 @@ const TakeReview = ({ meal, refetch }) => {
       meal_id: _id,
       meal_title,
       opinion: data.opinion,
-      rating: parseInt(data.rating)
+      rating: parseInt(data.rating),
     };
 
-    // handle post review to database
-    axiosPublic.post("/reviews", newReview).then((res) => {
-      if (res.data.insertedId) {
-        // handle increase review for the meal
-        const increase = { value: 1 };
-        axiosPublic.patch(`/meals/${_id}`, increase).then((res) => {
-          if (res.data.modifiedCount) {
-            // Success alert, reset form and refetch data to show ui
-            reset();
-            refetch();
-            toast.success("Review submitted.", {
-              style: {
-                background: "#000000",
-                padding: "12px",
-                color: "#FFFAEE",
-              },
-            });
-          }
-        });
-      }
-    });
+    if (user) {
+      // handle post review to database
+      axiosPublic.post("/reviews", newReview).then((res) => {
+        if (res.data.insertedId) {
+          // handle increase review for the meal
+          const increase = { value: 1 };
+          axiosPublic.patch(`/meals/${_id}`, increase).then((res) => {
+            if (res.data.modifiedCount) {
+              // Success alert, reset form and refetch data to show ui
+              reset();
+              toast.success("Review submitted.", {
+                style: {
+                  background: "#000000",
+                  padding: "12px",
+                  color: "#FFFAEE",
+                },
+              });
+            }
+          });
+        }
+      });
+    } else {
+      return Swal.fire({
+        title: "You are not logged in?",
+        text: "You have to login first",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Continue to login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
   };
 
   return (
@@ -104,10 +122,7 @@ const TakeReview = ({ meal, refetch }) => {
   );
 };
 
-export default TakeReview;
-TakeReview.propTypes = {
+export default MakeReview;
+MakeReview.propTypes = {
   meal: PropTypes.object.isRequired,
-  // totalReviews: PropTypes.number.isRequired,
-  // setTotalReviews: PropTypes.func.isRequired,
-  refetch: PropTypes.func.isRequired,
 };

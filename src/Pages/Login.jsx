@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -14,6 +14,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const { loginUser } = useAuth();
+  const navigate = useNavigate();
 
   // handle form
   const onSubmit = (data) => {
@@ -21,6 +22,7 @@ const Login = () => {
     loginUser(data.email, data.password)
       .then((result) => {
         if (result.user) {
+          navigate("/");
           toast.success("Logged in successfully.", {
             style: {
               background: "#000000",

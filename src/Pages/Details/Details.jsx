@@ -1,15 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { BiSolidLike } from "react-icons/bi";
-import TakeReview from "./TakeReview";
+import MakeReview from "./MakeReview";
 import Reviews from "./Reviews";
 import { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+// import toast from "react-hot-toast";
 
 const Details = () => {
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
   const meal = useLoaderData();
   const {
     _id,
@@ -25,15 +29,55 @@ const Details = () => {
     category,
     price,
   } = meal;
+  // const [makeLike, setMakeLike] = useState(localStorage.getItem(`like${_id}${user?.email}`));
+  const [totalLikes, setTotalLikes] = useState(likes);
+  const like = JSON.parse(localStorage.getItem(`like${_id}${user?.email}`));
+  const navigate = useNavigate();
+
   // load reviews based on the meal
-  const { data: mealReviews = [], refetch } = useQuery({
+  const { data: mealReviews = [] } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/reviews/${_id}`);
       return res.data;
     },
   });
-  const [totalReviews, setTotalReviews] = useState(reviews)
+
+  // Handle like meal
+  const handleLike = () => {
+    const liker = user?.email;
+    if (user) {
+      const likeIdInLs = localStorage.getItem(`${_id}${liker}`);
+      if (likeIdInLs) {
+        localStorage.removeItem(`${_id}${liker}`);
+        localStorage.removeItem(`like${_id}${liker}`);
+        // setMakeLike(false);
+        setTotalLikes(parseInt(totalLikes) - 1);
+      } else {
+        localStorage.setItem(`${_id}${liker}`, `${_id}${liker}`);
+        localStorage.setItem(`like${_id}${liker}`, true);
+        // setMakeLike(true);
+        setTotalLikes(parseInt(totalLikes) + 1);
+      }
+      // increase & decrese likes for meal
+      const isLike = { like };
+      axiosPublic.patch(`/meals/${_id}`, isLike).then(() => {});
+    } else {
+      Swal.fire({
+        text: "You have to login first to like any meal",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Continue to login"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login")
+        }
+      });
+    }
+  };
+
   // const dateTime = new Date().toLocaleString()
 
   return (
@@ -52,12 +96,19 @@ const Details = () => {
         </figure>
         {/* Like and Price */}
         <div className="flex items-center justify-between my-6">
-          <button className="py-3 px-5 flex gap-2 font-semibold items-center bg-white rounded-md shadow-md">
-            <span className="text-gray-400 text-xl">
+          <button
+            onClick={handleLike}
+            className="py-3 px-5 flex gap-2 font-semibold items-center bg-white rounded-md shadow-md"
+          >
+            <span
+              className={
+                like ? "text-[#F89A20] text-xl" : "text-gray-400 text-xl"
+              }
+            >
               <BiSolidLike />
             </span>
-            <span>Like</span>
-            <span>{likes}</span>
+            <span>{like ? "Dislike" : "Like"}</span>
+            <span>{totalLikes}</span>
           </button>
           <p className="text-sm md:text-base lg:text-xl font-semibold py-2 px-5 rounded-md border border-[#F89A20] text-[#F89A20] ">
             ${price}
@@ -100,7 +151,7 @@ const Details = () => {
               Rating: ({rating})
             </p>
             <p className="text-sm md:text-base mb-2 capitalize text-zinc-600">
-              Reviews: ({totalReviews})
+              Reviews: ({reviews})
             </p>
           </div>
         </div>
@@ -110,11 +161,13 @@ const Details = () => {
           </button>
         </div>
         {/* All reviews for the meal */}
-        {
-          reviews ? <Reviews mealReviews={mealReviews} meal_title={meal_title} /> : ""
-        }
+        {reviews ? (
+          <Reviews mealReviews={mealReviews} meal_title={meal_title} />
+        ) : (
+          ""
+        )}
         {/* Take review from user */}
-        <TakeReview refetch={refetch} meal={meal} totalReviews={totalReviews} setTotalReviews={setTotalReviews} />
+        <MakeReview meal={meal} />
       </div>
     </div>
   );
