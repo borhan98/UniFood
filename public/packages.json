@@ -1,7 +1,9 @@
 [
   {
+    "title": "Silver Membership Details",
+    "description": "This section outlines the facilities provided to students with a Silver membership. They enjoy a basic meal plan with a fixed number of meals per week, access to standard cafeteria options, and regular dining hours. The plan is designed to be budget-friendly with limited customization options.",
     "package": "silver",
-    "price": 99.9,
+    "price": 89.8,
     "facilities": [
       "Basic meal plan with access to standard cafeteria options.",
       "Limited number of meals per week",
@@ -10,8 +12,10 @@
     ]
   },
   {
+    "title": "Gold Membership Details",
+    "description": "Gold members have an expanded meal plan, offering more meals per week, including premium and healthier options. They benefit from flexible dining hours, priority access during peak times, and exclusive features such as special events and priority reservations. Limited customization options are available to cater to individual preferences.",
     "package": "gold",
-    "price": 199.9,
+    "price": 189.8,
     "facilities": [
       "Expanded meal options, including some premium choices.",
       "Increased number of meals per week.",
@@ -20,6 +24,8 @@
     ]
   },
   {
+    "title": "Platinum Membership Details",
+    "description": "Platinum members enjoy a premium meal plan with unlimited or significantly more meals per week, featuring gourmet and international cuisines. With 24/7 access to dining facilities, priority access, and exclusive features like personalized dietary planning and exclusive dining areas, Platinum members receive a highly customized and luxurious dining experience.",
     "package": "platinum",
     "price": 259.5,
     "facilities": [

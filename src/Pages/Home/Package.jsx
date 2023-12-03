@@ -3,11 +3,11 @@ import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Package = ({ pack }) => {
-  const { package_name, price, facilities } = pack;
-  console.log(pack);
+  const { _id, package_name, price, facilities } = pack;
+  
   return (
-    <Link>
-      <div className="p-4 pt-8 rounded-md bg-base-200 shadow-md h-full">
+    <Link to={`/checkout/${_id}`}>
+      <div className="p-4 pt-8 rounded-md bg-base-200 shadow-md h-full hover:scale-105 duration-300">
         <span className="p-3 px-5 border font-bold capitalize bg-white rounded-md">{package_name}</span>
         <div className="w-40 h-40 mx-auto my-10 rounded-full bg-[#F89A20] flex justify-center items-center ">
           <p>
