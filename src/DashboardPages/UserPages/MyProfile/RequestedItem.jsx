@@ -5,7 +5,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const RequestedItem = ({ meal, index, refetch }) => {
-  const { meal_id, meal_title, status } = meal;
+  const { _id, meal_id, meal_title, status } = meal;
   const [meals] = useMeals();
   const axiosSecure = useAxiosSecure();
 
@@ -46,7 +46,7 @@ const RequestedItem = ({ meal, index, refetch }) => {
       <td>{status}</td>
       <td>
         <button
-          onClick={() => handleDelete(meal_id)}
+          onClick={() => handleDelete(_id)}
           className="block text-xl p-2 bg-[#F89A20] shadow w-fit text-white ml-auto"
         >
           <RiDeleteBin6Line />

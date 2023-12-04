@@ -4,6 +4,7 @@ import SectionTitle from "../../../Components/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const UpdateReview = () => {
   const { user } = useAuth();
@@ -32,6 +33,12 @@ const UpdateReview = () => {
             color: "#FFFAEE",
           },
         });
+      }
+      if (!res.data.modifiedCount) {
+        Swal.fire({
+          text: "You didn't updated anything!",
+          icon: "warning",
+        })
       }
     });
   };

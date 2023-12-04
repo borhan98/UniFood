@@ -28,7 +28,7 @@ export const routes = createBrowserRouter([
         path: "details/:id",
         element: <Details />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/meals/${params.id}`),
+          fetch(`https://unifood-server.vercel.app/meals/${params.id}`),
       },
       {
         path: "checkout/:id",
@@ -38,7 +38,7 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/packages/${params.id}`),
+          fetch(`https://unifood-server.vercel.app/packages/${params.id}`),
       },
       {
         path: "meals",
@@ -78,7 +78,7 @@ export const routes = createBrowserRouter([
       {
         path: "myReviews/editReview/:id",
         element: <UpdateReview />,
-        loader: ({params}) => fetch(`http://localhost:5000/oneReview/${params.id}`)
+        loader: ({params}) => fetch(`https://unifood-server.vercel.app/oneReview/${params.id}`)
       },
       // Admin routes
       {
