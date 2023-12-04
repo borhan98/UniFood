@@ -1,10 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(true);
@@ -15,6 +16,7 @@ const Login = () => {
   } = useForm();
   const { loginUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // handle form
   const onSubmit = (data) => {
@@ -22,7 +24,7 @@ const Login = () => {
     loginUser(data.email, data.password)
       .then((result) => {
         if (result.user) {
-          navigate("/");
+          navigate(location.state ? location.state : "/");
           toast.success("Logged in successfully.", {
             style: {
               background: "#000000",
@@ -45,6 +47,9 @@ const Login = () => {
 
   return (
     <div className="relative flex justify-center bg-login-bg bg-center bg-cover min-h-[90vh] w-full ">
+      <Helmet>
+        <title>UniFood | Login</title>
+      </Helmet>
       <div className="absolute w-full h-full top-0 left-0 bg-black opacity-50"></div>
       <div className="relative text-white p-10 my-10 bg-[#0000008e] shadow-md h-fit">
         <h3 className="text-2xl mb-10 font-semibold text-white text-center">

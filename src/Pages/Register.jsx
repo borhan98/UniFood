@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Components/SocialLogin";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(true);
@@ -15,8 +16,9 @@ const Register = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, logoutUser } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   // handle form
   const onSubmit = (data) => {
@@ -34,16 +36,22 @@ const Register = () => {
               badge: "bronze",
             };
             axiosPublic.post("/users", newUser).then(() => {});
-
-            // Show success alert
+            // logout user
+            logoutUser()
+              .then(() => {
+                navigate("/login")
+                toast.success("Registration successful. Please login", {
+                  style: {
+                    background: "#000000",
+                    padding: "12px",
+                    color: "#FFFAEE",
+                  },
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             reset();
-            toast.success("Registration successful.", {
-              style: {
-                background: "#000000",
-                padding: "12px",
-                color: "#FFFAEE",
-              },
-            });
           })
           .catch((err) => {
             console.log(err.message);
@@ -64,6 +72,9 @@ const Register = () => {
   };
   return (
     <div className="relative flex justify-center bg-login-bg bg-center bg-cover min-h-[90vh] w-full ">
+      <Helmet>
+        <title>UniFood | Register</title>
+      </Helmet>
       <div className="absolute w-full h-full top-0 left-0 bg-black opacity-50"></div>
       <div className="relative text-white p-10 my-10 bg-[#0000008e] shadow-md h-fit">
         <h3 className="text-2xl mb-10 font-semibold text-white text-center">

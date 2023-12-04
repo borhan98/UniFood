@@ -1,13 +1,48 @@
 import { useLoaderData } from "react-router-dom";
 import SectionTitle from "../Components/SectionTitle";
 import { FaCheck, FaCcAmazonPay } from "react-icons/fa";
+import useAuth from "../Hooks/useAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Checkout = () => {
   const pack = useLoaderData();
   const { title, description, package_name, facilities, price } = pack;
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
 
+  const handlePaymet = (e) => {
+    e.preventDefault();
+
+    // handle user badge update
+    axiosPublic.patch(`/users/${user?.email}`, { package_name }).then((res) => {
+      if (res.data.modifiedCount) {
+        return toast.success(`Congratulations, you got ${package_name} badge`, {
+          style: {
+            background: "#000000",
+            padding: "12px",
+            color: "#FFFAEE",
+          },
+        });
+      }
+      if (res.data.message === "already purchase") {
+        return toast(`You have already purchase the ${package_name} package`, {
+          icon: "⚠",
+          style: {
+            background: "#000000",
+            padding: "12px",
+            color: "#FFFAEE",
+          },
+        });
+      }
+    });
+  };
   return (
     <div className="container mx-auto px-2 lg:px-0">
+      <Helmet>
+          <title>UniFood | Checkout</title>
+        </Helmet>
       <SectionTitle secTitle={title} secDescrip="" />
       {/* Information about the package */}
       <div className="flex py-10 gap-6">
@@ -33,9 +68,10 @@ const Checkout = () => {
             </p>
           ))}
         </div>
+        {/* Payment form */}
         <div className="w-1/3 h-fit p-4 py-8 rounded-md shadow bg-base-200">
           <h3 className="text-2xl font-medium mb-8 text-center">Payment</h3>
-          <form>
+          <form onSubmit={handlePaymet}>
             <div className="relative mb-4">
               <input
                 type="text"
@@ -54,11 +90,11 @@ const Checkout = () => {
               />
             </div>
             <button
-            type="submit"
-            className="py-3 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest "
-          >
-            Purchase
-          </button>
+              type="submit"
+              className="py-3 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest "
+            >
+              Purchase
+            </button>
           </form>
         </div>
       </div>

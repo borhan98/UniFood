@@ -66,6 +66,9 @@ const Footer = () => {
           </button>
         </div>
       </footer>
+      <div className="py-6 bg-[#27272A] ">
+        <p className="text-center text-zinc-300 "><small>@{new Date().getFullYear()} UniFood. All rights reserved</small></p>
+      </div>
     </div>
   );
 };

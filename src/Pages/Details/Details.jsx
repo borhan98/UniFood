@@ -9,12 +9,16 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 // import toast from "react-hot-toast";
 
 const Details = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const meal = useLoaderData();
+  const navigate = useNavigate();
   const {
     _id,
     meal_title,
@@ -32,7 +36,15 @@ const Details = () => {
   // const [makeLike, setMakeLike] = useState(localStorage.getItem(`like${_id}${user?.email}`));
   const [totalLikes, setTotalLikes] = useState(likes);
   const like = JSON.parse(localStorage.getItem(`like${_id}${user?.email}`));
-  const navigate = useNavigate();
+
+  // load user based on the logged in user
+  const { data: loadedUser = {} } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      return res.data;
+    },
+  });
 
   // load reviews based on the meal
   const { data: mealReviews = [] } = useQuery({
@@ -69,10 +81,62 @@ const Details = () => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Continue to login"
+        confirmButtonText: "Continue to login",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login")
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleMealRequest = () => {
+    const userBadge = loadedUser.badge;
+    if (user) {
+      if (
+        userBadge === "silver" ||
+        userBadge === "gold" ||
+        userBadge === "platinum"
+      ) {
+        const requestedMeal = {
+          user_name: user?.displayName,
+          user_email: user?.email,
+          meal_id: _id,
+          meal_title,
+          status: "pending",
+        };
+        // handle post meal request to databse
+        axiosPublic.post("/request", requestedMeal).then((res) => {
+          if (res.data.insertedId) {
+            toast.success(`Request submited`, {
+              style: {
+                background: "#000000",
+                padding: "12px",
+                color: "#FFFAEE",
+              },
+            });
+          }
+        });
+      } else {
+        // Inform to the logged in user to purchase a package
+        Swal.fire({
+          icon: "error",
+          title: "You don't have any packages!",
+          text: "You have to purchage a package before request for meal!",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "You are not logged in!",
+        text: "You have to login before request for meal!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Continue to login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
         }
       });
     }
@@ -156,7 +220,10 @@ const Details = () => {
           </div>
         </div>
         <div className="w-fit mx-auto mt-10">
-          <button className="py-3 px-5 bg-[#F89A20] border border-[#F89A20] hover:bg-transparent hover:text-zinc-700 text-lg duration-300 rounded-md text-white font-medium ">
+          <button
+            onClick={handleMealRequest}
+            className="py-3 px-5 bg-[#F89A20] border border-[#F89A20] hover:bg-transparent hover:text-zinc-700 text-lg duration-300 rounded-md text-white font-medium "
+          >
             Meal Request
           </button>
         </div>

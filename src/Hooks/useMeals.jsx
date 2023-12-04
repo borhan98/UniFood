@@ -7,7 +7,7 @@ const useMeals = () => {
   const { data: meals = [], refetch } = useQuery({
     queryKey: ["meals"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/meals");
+      const res = await axiosPublic.get(`/meals`);
       return res.data;
     },
   });
