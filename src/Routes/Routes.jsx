@@ -12,6 +12,8 @@ import MyProfile from "../DashboardPages/UserPages/MyProfile/MyProfile";
 import RequestedMeals from "../DashboardPages/UserPages/MyProfile/RequestedMeals";
 import MyReviews from "../DashboardPages/UserPages/MyProfile/MyReviews";
 import UpdateReview from "../DashboardPages/UserPages/MyProfile/UpdateReview";
+import ManageUsers from "../DashboardPages/AdminPages/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 export const routes = createBrowserRouter([
   {
@@ -74,10 +76,15 @@ export const routes = createBrowserRouter([
         element: <MyReviews />
       },
       {
-        path: "reviews/:id",
+        path: "myReviews/editReview/:id",
         element: <UpdateReview />,
-        // loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/oneReview/${params.id}`)
       },
+      // Admin routes
+      {
+        path: "manageUsers",
+        element: <AdminRoute><ManageUsers /></AdminRoute>
+      }
     ],
   },
 ]);

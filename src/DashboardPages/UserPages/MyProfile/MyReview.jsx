@@ -45,9 +45,11 @@ const MyReview = ({ review, index, refetch }) => {
       <td>{userMeal[0]?.likes}</td>
       <td>{userMeal[0]?.reviews}</td>
       <td>
-        <button className="block text-xl p-2 bg-[#F89A20] shadow w-fit text-white ml-auto">
-          <RiEdit2Fill />
-        </button>
+        <Link to={`editReview/${_id}`}>
+          <button className="block text-xl p-2 bg-[#F89A20] shadow w-fit text-white ml-auto">
+            <RiEdit2Fill />
+          </button>
+        </Link>
       </td>
       <td>
         <button
@@ -58,8 +60,7 @@ const MyReview = ({ review, index, refetch }) => {
         </button>
       </td>
       <td>
-        {/* `/details/${_id}` */}
-        <Link to={`/reviews/${_id}`}>
+        <Link to={`/details/${meal_id}`}>
           <button className="block text-xl p-2 bg-[#F89A20] shadow w-fit text-white ml-auto">
             <RiEyeCloseFill />
           </button>

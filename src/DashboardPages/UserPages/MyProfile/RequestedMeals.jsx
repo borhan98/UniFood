@@ -6,7 +6,7 @@ const RequestedMeals = () => {
   const [requestedMeals, refetch] = useRequestedMeals();
 
   return (
-    <div className="shadow-md pb-14 px-10 mx-10">
+    <div className="md:shadow-md pb-14 md:px-10 mx-1 md:mx-10">
       <SectionTitle secTitle="My Requested meals" secDescrip="" />
       <table className="table mt-6">
         <thead>

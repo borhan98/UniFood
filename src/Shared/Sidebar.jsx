@@ -1,19 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import UniFoodLogo from "../assets/UniLogo.png";
+import { PiBowlFoodFill } from "react-icons/pi";
 import {
-  FaBarcode,
   FaBars,
   FaHome,
   FaListUl,
   FaShoppingCart,
   FaStar,
+  FaUser,
   FaUsers,
-  FaUtensils,
 } from "react-icons/fa";
 import { MdPending } from "react-icons/md";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { MdFastfood } from "react-icons/md";
+import useAdmin from "../Hooks/useAdmin";
 
 const Sidebar = () => {
-  const isAdmin = false;
+  const [isAdmin] = useAdmin();
 
   const activeRoute = ({ isActive }) =>
     isActive
@@ -22,7 +25,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <Link>
+      <Link className="hidden md:block" to={"/"}>
         <div className="flex items-center justify-center">
           <img className="w-12" src={UniFoodLogo} alt="Logo" />
           <h3 className="text-3xl font-bold">
@@ -35,28 +38,38 @@ const Sidebar = () => {
         {isAdmin ? (
           <>
             <li>
-              <NavLink className={activeRoute} to={"/dashboard/adminHome"}>
-                <FaHome /> Admin Home
+              <NavLink className={activeRoute} to={"/dashboard/adminProfile"}>
+                <FaUser /> <span className="hidden md:block">Admin Profile</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={activeRoute} to={"/dashboard/manageUsers"}>
+                <FaUsers /> <span className="hidden md:block">Manage Users</span>
               </NavLink>
             </li>
             <li>
               <NavLink className={activeRoute} to={"/dashboard/additem"}>
-                <FaUtensils /> Add Item
+                <IoFastFoodSharp /> <span className="hidden md:block">Add Meal</span>
               </NavLink>
             </li>
             <li>
-              <NavLink className={activeRoute} to={"/dashboard/manageitem"}>
-                <FaBarcode /> Manage Iitems
+              <NavLink className={activeRoute} to={"/dashboard/allMeals"}>
+                <FaListUl /> <span className="hidden md:block">All Meals</span>
               </NavLink>
             </li>
             <li>
-              <NavLink className={activeRoute} to={"/dashboard/manageitem"}>
-                <FaListUl /> Manage Bookings
+              <NavLink className={activeRoute} to={"/dashboard/allReviews"}>
+                <FaStar /> <span className="hidden md:block">All Reviews</span>
               </NavLink>
             </li>
             <li>
-              <NavLink className={activeRoute} to={"/dashboard/allusers"}>
-                <FaUsers /> All Users
+              <NavLink className={activeRoute} to={"/dashboard/serveMeals"}>
+                <PiBowlFoodFill /><span className="hidden md:block">Serve Meals</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={activeRoute} to={"/dashboard/upcoming meals"}>
+                <MdFastfood /> <span className="hidden md:block">Upcoming Meals</span>
               </NavLink>
             </li>
           </>
@@ -64,7 +77,7 @@ const Sidebar = () => {
           <>
             <li>
               <NavLink className={activeRoute} to={"/dashboard/myprofile"}>
-                <FaHome /> <span className="hidden md:block">My Profile</span>
+                <FaUser /> <span className="hidden md:block">My Profile</span>
               </NavLink>
             </li>
             <li>
@@ -85,17 +98,17 @@ const Sidebar = () => {
         <>
           <li>
             <NavLink className={activeRoute} to={"/"}>
-              <FaHome /> Home
+              <FaHome /> <span className="hidden md:block">Home</span>
             </NavLink>
           </li>
           <li>
             <NavLink className={activeRoute} to={"/meals"}>
-              <FaBars /> Meals
+              <FaBars /> <span className="hidden md:block">Meals</span>
             </NavLink>
           </li>
           <li>
             <NavLink className={activeRoute} to={"/"}>
-              <MdPending /> Upcoming Meals
+              <MdPending /> <span className="hidden md:block">Upcoming Meals</span>
             </NavLink>
           </li>
         </>

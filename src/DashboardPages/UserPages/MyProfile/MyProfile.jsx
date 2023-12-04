@@ -31,7 +31,7 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="shadow-md pb-14 px-10 mx-10">
+    <div className="shadow-md  pb-4 md:pb-14 px-1 md:px-10 mx-1 md:mx-10">
       <SectionTitle secTitle="Your Profile" secDescrip="" />
       <div>
         <figure className="relative w-fit mx-auto rounded-full border-4 border-[#F89A20] mb-14 ">
@@ -47,16 +47,15 @@ const MyProfile = () => {
           />
         </figure>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-2 md:space-y-4">
         <div>
           <p className="text-zinc-500">Your name</p>
-          <p className="text-xl font-semibold mt-2">{name}</p>
+          <p className="text-lg md:text-xl font-semibold mt-2">{name}</p>
         </div>
         <div>
           <p className="text-zinc-500">Your email</p>
-          <p className="text-xl font-semibold mt-2">{email}</p>
+          <p className="text-lg md:text-xl font-semibold mt-2">{email}</p>
         </div>
-        {badge}
       </div>
     </div>
   );

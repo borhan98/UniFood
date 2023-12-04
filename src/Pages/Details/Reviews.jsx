@@ -26,26 +26,26 @@ const Reviews = ({ mealReviews, meal_title }) => {
               key={index}
               className="grid md:grid-cols-2 gap-10 items-center justify-center"
             >
-              <div className="text-right pl-24">
+              <div className="md:text-right md:pl-24">
                 <h3 className="text-3xl font-medium text-zinc-700">
                   {review?.meal_title}
                 </h3>
                 <p className="my-2">&#34;{review?.opinion}&#34;</p>
                 <h4 className="mt-6 text-xl font-medium">{review?.user_name}</h4>
                 <p className="text-sm tracking-widest">Student</p>
-                <div className="flex justify-end gap-4 mt-6">
+                <div className="flex justify-center md:justify-end gap-4 mt-6">
                     <span className="p-2 rounded-full text-white bg-[#F89A20] "><FaFacebookF /></span>
                     <span className="p-2 rounded-full text-white bg-[#F89A20] "><FaTwitter /></span>
                     <span className="p-2 rounded-full text-white bg-[#F89A20] "><FaLinkedinIn /></span>
                 </div>
               </div>
-              <figure className="relative w-64 h-64 border-8 border-[#F89A20] rounded-full">
+              <figure className="relative w-44 md:w-64 h-44 md:h-64 border-8 border-[#F89A20] rounded-full mx-auto md:mx-0">
                 <img
                   className="w-full h-full rounded-full"
                   src={review?.user_image}
                   alt="Student Photo"
                 />
-                <span className="absolute top-5 -left-1 text-white text-2xl p-4 bg-[#F89A20] rounded-full">
+                <span className="absolute top-2 md:top-5 -left-3 md:-left-1 text-white text-2xl p-4 bg-[#F89A20] rounded-full">
                   <FaQuoteLeft />
                 </span>
               </figure>

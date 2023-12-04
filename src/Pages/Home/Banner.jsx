@@ -9,23 +9,23 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <div className="h-[650px] bg-[#f89a2095]">
-      <div className="h-full container mx-auto px-2 lg:px-0 flex items-center gap-6">
+    <div className="h-fit md:h-[650px] py-4 md:py-0  bg-[#f89a2095]">
+      <div className="h-full container mx-auto px-2 lg:px-0 flex items-center gap-0 md:gap-6">
         <div className="flex-1">
           {/* Banner title */}
-          <h1 className="text-4xl font-bold capitalize">
-            Savor University Life: Easy meal management awaits
+          <h1 className="text-lg md:text-2xl lg:text-4xl font-bold capitalize">
+            Easy meal management awaits
           </h1>
           {/* banner description */}
-          <p className="text-sm md:test-base text-zinc-600 my-4">
+          <p className="text-[12px] md:test-base text-zinc-600 my-4">
             Your starting point to explore the world of delicious meals! Get
             acquainted with our hostel meal management system and discover a
             variety of culinary delights awaiting you.
           </p>
           {/* Search field in the banner */}
-          <div className="grid grid-cols-2 mt-8">
+          <div className="grid grid-cols-3 mt-8">
             <input
-              className="p-2 rounded-l-md focus:outline-none"
+              className="col-span-2 p-1 md:p-2 rounded-l-md focus:outline-none"
               type="search"
               name="search"
             />

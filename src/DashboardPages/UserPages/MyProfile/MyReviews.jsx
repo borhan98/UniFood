@@ -5,8 +5,10 @@ import MyReview from "./MyReview";
 const MyReviews = () => {
   const [reviews, refetch] = useReviews();
   return (
-    <div className="shadow-md pb-14 px-10 mx-10">
+    <div className="md:shadow-md pb-14 md:px-10 mx-1 md:mx-10">
+      <div className="w-fit mx-auto">
       <SectionTitle secTitle="My Reviews" secDescrip="" />
+      </div>
       <table className="table mt-6">
         <thead>
           <tr className="bg-[#D1A054] text-white uppercase">

@@ -22,10 +22,10 @@ const CategoryMeals = () => {
       <Tabs defaultIndex={0} onSelect={(index) => console.log(index)}>
         <div className="w-fit mx-auto mb-10">
           <TabList className={"flex"}>
-            <Tab className={"px-3 py-1 rounded-t border-b "}>All Meals</Tab>
-            <Tab className={"px-3 py-1 rounded-t border-b "}>Breakfast</Tab>
-            <Tab className={"px-3 py-1 rounded-t border-b "}>Lunch</Tab>
-            <Tab className={"px-3 py-1 rounded-t border-b "}>Dinner</Tab>
+            <Tab className={"px-2 md:px-3 py-1 rounded-t border-b "}>All Meals</Tab>
+            <Tab className={"px-2 md:px-3 py-1 rounded-t border-b "}>Breakfast</Tab>
+            <Tab className={"px-2 md:px-3 py-1 rounded-t border-b "}>Lunch</Tab>
+            <Tab className={"px-2 md:px-3 py-1 rounded-t border-b "}>Dinner</Tab>
           </TabList>
         </div>
         <TabPanel>

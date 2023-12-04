@@ -78,8 +78,8 @@ const Navbar = () => {
             {/* Website Logo */}
             <Link>
               <div className="flex items-center">
-                <img className="w-12" src={UniFoodLogo} alt="Logo" />
-                <h3 className="text-3xl font-bold">
+                <img className="w-7 md:w-9 lg:w-12" src={UniFoodLogo} alt="Logo" />
+                <h3 className="text-xl md:text-3xl font-bold">
                   Uni<span className="text-[#F89A20]">Food</span>{" "}
                 </h3>
               </div>
@@ -94,10 +94,10 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button">
               <p className="relative flex items-center gap-1">
-                <span className="p-4 text-2xl text-white">
+                <span className="p-2 md:p-4 text-2xl text-white">
                   <FaBell />
                 </span>
-                <span className="absolute top-0 right-2 text-lg bg-[#F89A20] px-1 text-white rounded-full">
+                <span className="absolute top-0 right-2 text-sm md:text-lg bg-[#F89A20] px-1 text-white rounded-full">
                   0
                 </span>
               </p>
@@ -117,12 +117,12 @@ const Navbar = () => {
                 className="border-4 border-[#F89A20] rounded-full"
               >
                 <img
-                  className="w-12 h-12 rounded-full"
+                  className="w-8 md:w-12 h-8 md:h-12 rounded-full"
                   src={user?.photoURL}
                   alt="Profile Image"
                 />
               </div>
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-60">
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box min-w-[200px] ">
                 <p className="text-center font-medium my-2">
                   {user?.displayName}
                 </p>
