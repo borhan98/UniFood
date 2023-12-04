@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
 import useReviews from "../../../Hooks/useReviews";
 import MyReview from "./MyReview";
@@ -6,6 +7,9 @@ const MyReviews = () => {
   const [reviews, refetch] = useReviews();
   return (
     <div className="md:shadow-md pb-14 md:px-10 mx-1 md:mx-10">
+      <Helmet>
+        <title>UniFood | My Reviews</title>
+      </Helmet>
       <div className="w-fit mx-auto">
       <SectionTitle secTitle="My Reviews" secDescrip="" />
       </div>

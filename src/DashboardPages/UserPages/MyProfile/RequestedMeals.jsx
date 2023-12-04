@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
 import useRequestedMeals from "../../../Hooks/useRequestedMeals";
 import RequestedItem from "./RequestedItem";
@@ -7,6 +8,9 @@ const RequestedMeals = () => {
 
   return (
     <div className="md:shadow-md pb-14 md:px-10 mx-1 md:mx-10">
+      <Helmet>
+        <title>UniFood | Requested Meals</title>
+      </Helmet>
       <SectionTitle secTitle="My Requested meals" secDescrip="" />
       <table className="table mt-6">
         <thead>

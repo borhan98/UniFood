@@ -6,6 +6,7 @@ import silverImg from "../../../assets/badge/silver.png";
 import goldImg from "../../../assets/badge/gold.png";
 import platinumImg from "../../../assets/badge/platinum.png";
 import bronzeImg from "../../../assets/badge/bronze.png";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -32,6 +33,9 @@ const MyProfile = () => {
 
   return (
     <div className="shadow-md  pb-4 md:pb-14 px-1 md:px-10 mx-1 md:mx-10">
+      <Helmet>
+        <title>UniFood | My Profile</title>
+      </Helmet>
       <SectionTitle secTitle="Your Profile" secDescrip="" />
       <div>
         <figure className="relative w-fit mx-auto rounded-full border-4 border-[#F89A20] mb-14 ">
