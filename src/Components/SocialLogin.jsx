@@ -3,10 +3,13 @@ import { PiGithubLogoFill } from "react-icons/pi";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleLogin } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Handle google login
   const handleGoogleLogin = () => {
@@ -25,6 +28,7 @@ const SocialLogin = () => {
               console.log(res.data);
             });
           }
+          navigate(location.state ? location.state : "/");
           toast.success("Logged in successfully.", {
             style: {
               background: "#000000",

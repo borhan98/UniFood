@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { GrUserAdmin } from "react-icons/gr";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const User = ({ user, index, refetch }) => {
   const { name, email, badge } = user;
@@ -9,16 +10,27 @@ const User = ({ user, index, refetch }) => {
 
   // make admin
   const handleMakeAdmin = (mail) => {
-    console.log(user);
-    axiosSecure.patch(`/users/admin/${mail}`).then((res) => {
-      if (res.data.modifiedCount) {
-        refetch();
-        toast.success(`${name} is admin now`, {
-          style: {
-            background: "#000000",
-            padding: "12px",
-            color: "#FFFAEE",
-          },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Please click confirm if you want make admin!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/admin/${mail}`).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            toast.success(`${name} is admin now`, {
+              style: {
+                background: "#000000",
+                padding: "12px",
+                color: "#FFFAEE",
+              },
+            });
+          }
         });
       }
     });
