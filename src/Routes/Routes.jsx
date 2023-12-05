@@ -16,6 +16,7 @@ import ManageUsers from "../DashboardPages/AdminPages/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AddMeal from "../DashboardPages/AdminPages/AddMeal";
 import ErrorPage from "../Pages/ErrorPage";
+import AllReviews from "../DashboardPages/AdminPages/AllReviews";
 
 export const routes = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const routes = createBrowserRouter([
       {
         path: "addMeal",
         element: <AdminRoute><AddMeal /></AdminRoute>
+      },
+      {
+        path: "allReviews",
+        element: <AdminRoute><AllReviews /></AdminRoute>
       }
     ],
   },

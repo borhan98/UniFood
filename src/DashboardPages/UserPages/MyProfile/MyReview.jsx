@@ -29,7 +29,7 @@ const MyReview = ({ review, index, refetch }) => {
             refetch();
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "Your review has been deleted.",
               icon: "success",
             });
           }
