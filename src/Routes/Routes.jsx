@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import AddMeal from "../DashboardPages/AdminPages/AddMeal";
 import ErrorPage from "../Pages/ErrorPage";
 import AllReviews from "../DashboardPages/AdminPages/AllReviews";
+import AdminProfile from "../DashboardPages/AdminPages/AdminProfile";
 
 export const routes = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const routes = createBrowserRouter([
         loader: ({params}) => fetch(`https://unifood-server.vercel.app/oneReview/${params.id}`)
       },
       // Admin routes
+      {
+        path: "adminProfile",
+        element: <AdminRoute><AdminProfile /></AdminRoute>
+      },
       {
         path: "manageUsers",
         element: <AdminRoute><ManageUsers /></AdminRoute>
