@@ -48,7 +48,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink className={activeRoute} to={"/dashboard/additem"}>
+              <NavLink className={activeRoute} to={"/dashboard/addMeal"}>
                 <IoFastFoodSharp /> <span className="hidden md:block">Add Meal</span>
               </NavLink>
             </li>
@@ -107,7 +107,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink className={activeRoute} to={"/"}>
+            <NavLink className={activeRoute} to={"/upcoming"}>
               <MdPending /> <span className="hidden md:block">Upcoming Meals</span>
             </NavLink>
           </li>

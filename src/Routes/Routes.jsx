@@ -14,11 +14,14 @@ import MyReviews from "../DashboardPages/UserPages/MyProfile/MyReviews";
 import UpdateReview from "../DashboardPages/UserPages/MyProfile/UpdateReview";
 import ManageUsers from "../DashboardPages/AdminPages/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import AddMeal from "../DashboardPages/AdminPages/AddMeal";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -84,6 +87,10 @@ export const routes = createBrowserRouter([
       {
         path: "manageUsers",
         element: <AdminRoute><ManageUsers /></AdminRoute>
+      },
+      {
+        path: "addMeal",
+        element: <AdminRoute><AddMeal /></AdminRoute>
       }
     ],
   },
