@@ -2,11 +2,14 @@ import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const AddMeal = () => {
   const [addMeal, setAddMeal] = useState("");
   const [upcomingMeal, setUpcomingMeal] = useState("");
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,13 +20,6 @@ const AddMeal = () => {
     const ingredients = form.ingredients.value;
     const description = form.description.value;
     const price = parseFloat(form.price.value);
-
-    if (addMeal) {
-      // TODO: ("add logic");
-    }
-    if (upcomingMeal) {
-      // TODO: ('upcoming logic');
-    }
 
     const newMeal = {
       meal_title,
@@ -37,11 +33,41 @@ const AddMeal = () => {
       post_time: new Date().toLocaleDateString(),
       distributor_name: user?.displayName,
       distributor_email: user?.email,
-
     };
-    console.log(newMeal);
-    setAddMeal('');
-    setUpcomingMeal('');
+
+    if (addMeal) {
+      // TODO: ("add logic");
+      axiosSecure.post(`http://localhost:5000/meals`, newMeal).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`Successfully added`, {
+            style: {
+              background: "#000000",
+              padding: "12px",
+              color: "#FFFAEE",
+            },
+          });
+        }
+      });
+    }
+    if (upcomingMeal) {
+      // TODO: ('upcoming logic');
+      axiosSecure
+        .post(`http://localhost:5000/upcoming`, newMeal)
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success(`Successfully added to upcoming meal`, {
+              style: {
+                background: "#000000",
+                padding: "12px",
+                color: "#FFFAEE",
+              },
+            });
+          }
+        });
+    }
+
+    setAddMeal("");
+    setUpcomingMeal("");
   };
 
   return (
