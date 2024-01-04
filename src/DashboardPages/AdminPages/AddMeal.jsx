@@ -1,12 +1,47 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle";
 import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
 
 const AddMeal = () => {
+  const [addMeal, setAddMeal] = useState("");
+  const [upcomingMeal, setUpcomingMeal] = useState("");
   const { user } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = e.target;
+    const meal_title = form.meal_title.value;
+    const category = form.category.value;
+    const ingredients = form.ingredients.value;
+    const description = form.description.value;
+    const price = parseFloat(form.price.value);
+
+    if (addMeal) {
+      // TODO: ("add logic");
+    }
+    if (upcomingMeal) {
+      // TODO: ('upcoming logic');
+    }
+
+    const newMeal = {
+      meal_title,
+      category,
+      price,
+      ingredients,
+      description,
+      reviews: 0,
+      likes: 0,
+      rating: 0,
+      post_time: new Date().toLocaleDateString(),
+      distributor_name: user?.displayName,
+      distributor_email: user?.email,
+
+    };
+    console.log(newMeal);
+    setAddMeal('');
+    setUpcomingMeal('');
   };
 
   return (
@@ -152,6 +187,7 @@ const AddMeal = () => {
           <div className="grid gap-4 grid-cols-2">
             {/* Add Meall Button */}
             <button
+              onClick={() => setAddMeal("add")}
               type="submit"
               className="py-3 mt-4 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest "
             >
@@ -159,6 +195,7 @@ const AddMeal = () => {
             </button>
             {/* Add to upcoming Button */}
             <button
+              onClick={() => setUpcomingMeal("upcoming")}
               type="submit"
               className="py-3 mt-4 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest "
             >
