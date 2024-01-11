@@ -21,7 +21,21 @@ const AddMeal = () => {
 
   const onSubmit = (data) => {
     // login user
-    console.log("ho kixu");
+    //   // new meal to add
+    const newMeal = {
+      meal_title: data.meal_title,
+      category: data.category,
+      price: data.price,
+      ingredients: data.ingredients,
+      description: data.description,
+      reviews: 0,
+      likes: 0,
+      rating: 0,
+      post_time: new Date().toLocaleDateString(),
+      distributor_name: user?.displayName,
+      distributor_email: user?.email,
+    };
+    console.log(newMeal)
   };
 
   // const handleSubmit = (e) => {
