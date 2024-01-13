@@ -5,11 +5,15 @@ import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
+
+const image_api_key = import.meta.env.VITE_IMAGE_API_KEY;
+const image_api = `https://api.imgbb.com/1/upload?key=${image_api_key}`;
 
 const AddMeal = () => {
   const [addMeal, setAddMeal] = useState("");
   const [upcomingMeal, setUpcomingMeal] = useState("");
-  const [disbaleButton, setDisableButton] = useState(true);
   const {
     register,
     handleSubmit,
@@ -17,91 +21,79 @@ const AddMeal = () => {
   } = useForm();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  
+  const axiosPublic = useAxiosPublic();
 
-  const onSubmit = (data) => {
-    // login user
-    //   // new meal to add
-    const newMeal = {
-      meal_title: data.meal_title,
-      category: data.category,
-      price: data.price,
-      ingredients: data.ingredients,
-      description: data.description,
-      reviews: 0,
-      likes: 0,
-      rating: 0,
-      post_time: new Date().toLocaleDateString(),
-      distributor_name: user?.displayName,
-      distributor_email: user?.email,
-    };
-    console.log(newMeal)
+  // handle add new meal
+  const onSubmit = (data, e) => {
+    // upload image to imgBB
+    const image_file = { image: data.image[0] };
+    axiosPublic.post(image_api, image_file, {
+      headers: { "Content-Type": "multipart/form-data" }
+    }).then(res => {
+      if (res.data.success) {
+        // new meal to add
+        const newMeal = {
+          meal_title: data.meal_title,
+          category: data.category,
+          price: parseFloat(data.price),
+          ingredients: data.ingredients.split(","),
+          description: data.description,
+          image: res.data.data.display_url,
+          reviews: 0,
+          likes: 0,
+          rating: 0,
+          post_time: new Date().toLocaleDateString(),
+          distributor_name: user?.displayName,
+          distributor_email: user?.email,
+        };
+
+        // add meal
+        if (addMeal) {
+          // add a new meal
+          axiosSecure.post(`http://localhost:5000/meals`, newMeal).then((res) => {
+            if (res.data.insertedId) {
+              toast.success(`Successfully added`, {
+                style: {
+                  background: "#000000",
+                  padding: "12px",
+                  color: "#FFFAEE",
+                },
+              });
+            }
+          });
+        }
+        // add to upcoming
+        if (upcomingMeal) {
+          // add a new meal to upcomonig
+          axiosSecure
+            .post(`http://localhost:5000/upcoming`, newMeal)
+            .then((res) => {
+              if (res.data.insertedId) {
+                toast.success(`Successfully added to upcoming meal`, {
+                  style: {
+                    background: "#000000",
+                    padding: "12px",
+                    color: "#FFFAEE",
+                  },
+                });
+              }
+            });
+        }
+
+        setAddMeal("");
+        setUpcomingMeal("");
+        e.target.reset();
+      } else {
+        return toast.success(`Something went wrong when you try to host image`, {
+          style: {
+            background: "#000000",
+            padding: "12px",
+            color: "#FFFAEE",
+          },
+        });
+      }
+    })
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const form = e.target;
-  //   const meal_title = form.meal_title.value;
-  //   const category = form.category.value;
-  //   const ingredients = form.ingredients.value.split(",");
-  //   const description = form.description.value;
-  //   const price = parseFloat(form.price.value);
-
-  //   if (!meal_title || !ingredients || !description || !price) {
-  //     return alert("Please provide a valid value")
-  //   }
-
-  //   // new meal to add
-  //   const newMeal = {
-  //     meal_title,
-  //     category,
-  //     price,
-  //     ingredients,
-  //     description,
-  //     reviews: 0,
-  //     likes: 0,
-  //     rating: 0,
-  //     post_time: new Date().toLocaleDateString(),
-  //     distributor_name: user?.displayName,
-  //     distributor_email: user?.email,
-  //   };
-
-  //   if (addMeal) {
-  //     // add a new meal
-  //     axiosSecure.post(`http://localhost:5000/meals`, newMeal).then((res) => {
-  //       if (res.data.insertedId) {
-  //         toast.success(`Successfully added`, {
-  //           style: {
-  //             background: "#000000",
-  //             padding: "12px",
-  //             color: "#FFFAEE",
-  //           },
-  //         });
-  //       }
-  //     });
-  //   }
-  //   if (upcomingMeal) {
-  //     // add a new meal to upcomonig
-  //     axiosSecure
-  //       .post(`http://localhost:5000/upcoming`, newMeal)
-  //       .then((res) => {
-  //         if (res.data.insertedId) {
-  //           toast.success(`Successfully added to upcoming meal`, {
-  //             style: {
-  //               background: "#000000",
-  //               padding: "12px",
-  //               color: "#FFFAEE",
-  //             },
-  //           });
-  //         }
-  //       });
-  //   }
-
-  //   setAddMeal("");
-  //   setUpcomingMeal("");
-  //   form.reset();
-  // };
 
   return (
     <div className="md:shadow-md pb-14 md:px-10 mx-1 md:mx-10">
@@ -178,14 +170,14 @@ const AddMeal = () => {
           <div className="flex flex-col space-y-2 mb-4">
             <label htmlFor="price">Meal price</label>
             <input
-              type="number"
-              {...register("price", { required: true })}
+              type="text"
+              {...register("price", { required: true, pattern: /^\d+(\.\d+)?$/ })}
               placeholder="Enter price"
               className="py-3 px-4 text-black bg-white rounded-md shadow focus:shadow-xl focus:outline-none "
               id="price"
             />
             {errors.price && (
-              <span className="text-red-500">This field is required*</span>
+              <span className="text-red-500">Please input a valid number*</span>
             )}
           </div>
           {/* Ingredients*/}
@@ -217,17 +209,21 @@ const AddMeal = () => {
               <span className="text-red-500">This field is required*</span>
             )}
           </div>
+          {/* Photo*/}
+          <div className="flex flex-col justify-center items-center border-2 border-[#F89A20] space-y-2 mb-4 rounded-md">
+            {/* TODO: upload photo */}
+            <input type="file" {...register('image', { required: true })} className="img_upload w-full p-10" />
+            {errors.image && (
+              <span className="text-red-500">This field is required*</span>
+            )}
+          </div>
           <div className="grid gap-4 grid-cols-2">
             {/* Add Meall Button */}
             <button
               onClick={() => setAddMeal("add")}
               type="submit"
               disabled={false}
-              className={`py-3 mt-4 text-lg shadow w-full rounded-md text-white font-medium duration-300 ${
-                disbaleButton
-                  ? "bg-[#f89a2073]"
-                  : "bg-[#F89A20] hover:tracking-widest"
-              } `}
+              className={`py-3 mt-4 text-lg shadow bg-[#F89A20] w-full rounded-md text-white font-medium duration-300 hover:tracking-widest `}
             >
               Add Meal
             </button>

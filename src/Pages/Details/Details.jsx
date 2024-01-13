@@ -11,7 +11,6 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-// import toast from "react-hot-toast";
 
 const Details = () => {
   const axiosPublic = useAxiosPublic();
@@ -33,6 +32,7 @@ const Details = () => {
     category,
     price,
   } = meal;
+  
   // const [makeLike, setMakeLike] = useState(localStorage.getItem(`like${_id}${user?.email}`));
   const [totalLikes, setTotalLikes] = useState(likes);
   const like = JSON.parse(localStorage.getItem(`like${_id}${user?.email}`));
