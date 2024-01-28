@@ -43,7 +43,7 @@ const SingleReview = ({ review, index, refetch }) => {
       <td>{index + 1}</td>
       <td>{meal_title}</td>
       <td>{currentMeal[0]?.likes}</td>
-      <td>{currentMeal[0]?.reviews}</td>
+      <td>{currentMeal[0]?.rating}</td>
       <td>
         <button
           onClick={() => handleDelete(_id)}

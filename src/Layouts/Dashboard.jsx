@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <div className="bg-[#FBC47C] ">
       <Helmet>
-      <title>UniFood | Dashboard</title>
+        <title>UniFood | Dashboard</title>
       </Helmet>
       <div className="container mx-auto px-2 lg:px-0 flex">
         <div className="w-2/12 md:w-3/12 bg-base-300 min-h-screen  py-10">

@@ -50,7 +50,7 @@ const AddMeal = () => {
         // add meal
         if (addMeal) {
           // add a new meal
-          axiosSecure.post(`http://localhost:5000/meals`, newMeal).then((res) => {
+          axiosSecure.post(`https://unifood-server.vercel.app/meals`, newMeal).then((res) => {
             if (res.data.insertedId) {
               toast.success(`Successfully added`, {
                 style: {
@@ -66,7 +66,7 @@ const AddMeal = () => {
         if (upcomingMeal) {
           // add a new meal to upcomonig
           axiosSecure
-            .post(`http://localhost:5000/upcoming`, newMeal)
+            .post(`https://unifood-server.vercel.app/upcoming`, newMeal)
             .then((res) => {
               if (res.data.insertedId) {
                 toast.success(`Successfully added to upcoming meal`, {
@@ -84,7 +84,7 @@ const AddMeal = () => {
         setUpcomingMeal("");
         e.target.reset();
       } else {
-        return toast.success(`Something went wrong when you try to host image`, {
+        return toast.error(`Something went wrong when you try to host image`, {
           style: {
             background: "#000000",
             padding: "12px",

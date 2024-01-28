@@ -5,10 +5,13 @@ import errorImage from "../assets/Error404.png"
 
 
 const ErrorPage = () => {
-    return (
-      <div className={"bg-error-pattern bg-login-bg bg-center bg-cover bg-no-repeat h-[650px]"}>
-        <div className="container bg-[#0000007e] mx-auto flex items-center justify-center h-full">
-          <div className="order-2">
+  return (
+    <div className={"relative bg-center bg-cover bg-no-repeat h-[100vh]"} style={{
+      backgroundImage: "url(https://i.ibb.co/Qf3jCgX/loginBG.jpg)"
+    }}>
+      <div className="absolute top-0 left-0 h-full w-full bg-[#000000b9]">
+        <div className="container mx-auto flex items-center justify-center h-full">
+          <div className="order-2 flex-1">
             <h2 className="flex">
               <span className="text-xl text-[#F89A20]"><RiMenu3Line className="rotate-45" /></span>
               <span className="first-letter:text-6xl first-letter:text-[#F89A20] text-4xl font-bold mt-2 -ml-2 text-zinc-200">Ooooops</span>
@@ -18,13 +21,13 @@ const ErrorPage = () => {
               <NavLink to={"/"}>Back to Home</NavLink>
             </button>
           </div>
-          <figure className="order-1 h-full">
+          <figure className="order-1 h-full flex-1">
             <img className="h-full" src={errorImage} alt="Error image" />
           </figure>
         </div>
       </div>
-    );
-  };
-  
-  export default ErrorPage;
-  
+    </div>
+  );
+};
+
+export default ErrorPage;

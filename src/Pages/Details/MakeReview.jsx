@@ -32,6 +32,7 @@ const MakeReview = ({ meal }) => {
           // handle increase review for the meal
           const increase = { value: 1 };
           axiosPublic.patch(`/meals/${_id}`, increase).then((res) => {
+            console.log(res.data);
             if (res.data.modifiedCount) {
               // Success alert, reset form and refetch data to show ui
               reset();

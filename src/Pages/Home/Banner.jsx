@@ -9,7 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <div className="h-fit md:h-[650px] py-4 md:py-0  bg-[#f89a2095]">
+    <div className="h-fit md:h-[700px] py-4 md:py-0  bg-[#f89a2095]">
       <div className="h-full container mx-auto px-2 lg:px-0 flex items-center gap-0 md:gap-6">
         <div className="flex-1">
           {/* Banner title */}

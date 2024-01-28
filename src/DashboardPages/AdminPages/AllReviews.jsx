@@ -30,7 +30,7 @@ const AllReviews = () => {
             <th></th>
             <th>Meal</th>
             <th>Likes</th>
-            <th>Reviews</th>
+            <th>Rating</th>
             <th>Actions</th>
             <th>View Meal</th>
           </tr>

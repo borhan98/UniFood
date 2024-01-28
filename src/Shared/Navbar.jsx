@@ -91,7 +91,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-2">
           {/* Dropdow Notification */}
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end z-50">
             <div tabIndex={0} role="button">
               <p className="relative flex items-center gap-1">
                 <span className="p-2 md:p-4 text-2xl text-white">
@@ -110,7 +110,7 @@ const Navbar = () => {
           </div>
           {/* User profile and Join us button */}
           {user ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end z-50">
               <div
                 tabIndex={0}
                 role="button"
@@ -135,7 +135,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to={"/login"}>
+            <Link to={"/login"} className="z-50">
               <button className="py-2 px-4 font-medium rounded-md bg-[#F89A20] text-white text-lg capitalize">
                 Join Us
               </button>

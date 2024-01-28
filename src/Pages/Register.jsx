@@ -35,7 +35,7 @@ const Register = () => {
               image: data.photo,
               badge: "bronze",
             };
-            axiosPublic.post("/users", newUser).then(() => {});
+            axiosPublic.post("/users", newUser).then(() => { });
             // logout user
             logoutUser()
               .then(() => {
@@ -71,7 +71,9 @@ const Register = () => {
       });
   };
   return (
-    <div className="relative flex justify-center bg-login-bg bg-center bg-cover min-h-[90vh] w-full ">
+    <div className="relative flex justify-center bg-center bg-cover min-h-[90vh] w-full " style={{
+      backgroundImage: "url(https://i.ibb.co/Qf3jCgX/loginBG.jpg)"
+    }}>
       <Helmet>
         <title>UniFood | Register</title>
       </Helmet>
